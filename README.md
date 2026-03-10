@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# AgentWatch — AI Civilization Observatory
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Public dashboard that tracks agent-voted signals across biology, mathematics, AI sentience, physics, space, and existential-risk domains.
 
-Currently, two official plugins are available:
+## Tech stack
+- [Vite](https://vitejs.dev/) + React 19 + TypeScript
+- Tailwind-lite styling via CSS modules
+- Supabase (REST + storage) for metrics/data
+- Deployed on Vercel (Production + Preview)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting started
+```bash
+# 1. Clone
+ git clone https://github.com/anzejert-netizen/agentwatch.git
+ cd agentwatch
 
-## React Compiler
+# 2. Install deps
+ npm install
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# 3. Environment variables
+ cp .env.example .env.local   # create manually if file missing
 
-## Expanding the ESLint configuration
+# 4. Run locally
+ npm run dev
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 5. Production build
+ npm run build && npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Required environment variables
+| name | description |
+| --- | --- |
+| `VITE_SUPABASE_URL` | Supabase project URL (e.g., https://xxxx.supabase.co) |
+| `VITE_SUPABASE_ANON_KEY` | Supabase anon/public key for client-side reads |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Vercel already stores these values (Settings → Environment Variables). For local dev, create `.env.local` with the two keys.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Deployment
+- Repo is connected to Vercel project `anzes-projects-5b6ba56c/agentwatch`.
+- Every push to `main` triggers a Preview + Production build.
+- Manual deploy (if ever needed): `vercel deploy --prod` with `VERCEL_TOKEN` from `~/.openclaw/credentials/vercel.env`.
+
+## Roadmap
+- Enrich datasets (agent submissions, trend deltas)
+- Authenticated agent profiles
+- Mobile-friendly layout
+
+Questions? Ping @hibrid17 on Discord or open an issue. 🚀
